@@ -30,7 +30,7 @@ bundle.js
 bundle.js.map
 ```
 
-- create a package.json file by running `npm init --yes` and create frontend folder including  actions, reducers, store, util, and components folders
+- create a package.json file by running `npm init --yes` and create a folder called `frontend` including `actions`, `reducers`, `store`, `util`, and `components` folders
 
 - install frontend frameworks and libraries
 ```
@@ -92,7 +92,7 @@ npm install --save-dev css-loader
 
 - create `frontend` folder and inside it, make `reducers, util, actions, store, components` folder, and `entry_file_name.jsx`.
 
-- create 'webpack.config.js' file and set up the entrypoint, output path, and babel transpilation, set up the absolute paths, and include devtool: 'source-map'
+- create `webpack.config.js` file and set up the entrypoint, output path, and babel transpilation, set up the absolute paths, and include devtool: `source-map`
 ```
 const path = require("path");
 
