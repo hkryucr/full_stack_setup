@@ -39,6 +39,8 @@ npm install --save webpack webpack-cli react react-dom react-router-dom redux re
 - optionally, if you want to use css-loader, install as follows, which enables to use `import './another-stylesheet.css'` inside js/jsx files.
 ```
 npm install --save-dev css-loader
+npm install --save-dev style-loader
+
 ```
 - in package.json, add the following code under the scripts `"start": "webpack --watch --mode=development"`
 ```
@@ -97,38 +99,44 @@ npm install --save-dev css-loader
 const path = require("path");
 
 module.exports = {
-  context: __dirname,
-  entry: "./frontend/your_entry_file_name.jsx",
-  output: {
-    path: path.resolve(__dirname, "app", "assets", "javascripts"),
-    filename: "bundle.js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          query: {
-            presets: ["@babel/env", "@babel/react"]
-          }
+    context: __dirname,
+    entry: "./frontend/yocal.jsx",
+    output: {
+        path: path.resolve(__dirname, "app", "assets", "javascripts"),
+        filename: "bundle.js"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: "babel-loader",
+                    query: {
+                        presets: ["@babel/env", "@babel/react"]
+                    }
+                }
+            }
+        ]
+    },
+    devtool: "source-map",
+    resolve: {
+        extensions: [".js", ".jsx", "*"],
+        alias: {
+            css: path.resolve(__dirname, "frontend/css"),
+            js: path.resolve(__dirname, "frontend/js"),
+            store: path.resolve(__dirname, "frontend/redux/store"),
+            util: path.resolve(__dirname, "frontend/redux/util"),
+            reducers: path.resolve(__dirname, "frontend/redux/reducers"),
+            actions: path.resolve(__dirname, "frontend/redux/actions")
         }
-      }
-    ]
-  },
-  devtool: "source-map",
-  resolve: {
-    extensions: [".js", ".jsx", "*"],
-    alias: {
-      components: path.resolve(__dirname, "frontend/components"),
-      actions: path.resolve(__dirname, "frontend/actions"),
-      store: path.resolve(__dirname, "frontend/store"),
-      util: path.resolve(__dirname, "frontend/util"),
-      reducers: path.resolve(__dirname, "frontend/reducers")
     }
-  }
 };
+
 ```
 
 - set up your entry file (entry_file_name.jsx that correspondes to the entry file in webpack.config.js)
