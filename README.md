@@ -28,6 +28,37 @@ gem 'jquery-rails'
 node_modules/
 bundle.js
 bundle.js.map
+
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+# config/initializers/secret_token.rb
+config/master.key
+config/initializers/secret_token.rb
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore node_modules
+/public/packs
+/public/packs-test
+/public/assets
+/tmp
+
+
 ```
 
 - create a package.json file by running `npm init --yes` and create a folder called `frontend` including `actions`, `reducers`, `store`, `util`, and `components` folders
