@@ -102,10 +102,23 @@ keys.js
 ```
 
 - create config folder and create keys.js in the config folder
-- inside keys.js
+- in keys.js file
 ```
 module.exports = {
   mongoURI:
     "mongodb+srv://<name>:<random generated secure password>@cluster0-cmn44.mongodb.net/test?retryWrites=true&w=majority"
 };
 ```
+- in app.js file
+```
+const mongoose = require("mongoose");
+const db = require("./config/keys").mongoURI;
+
+mongoose
+  .connect(db, { useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to mongoDB");
+  })
+  .catch(err => console.log(err));
+```
+
