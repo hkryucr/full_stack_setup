@@ -29,3 +29,64 @@
 - replace the <username> with the username we just created
 - replace the <password> with the auto-generated password
 - now that we have this connection string we want to save it somewhere it won’t be committed
+
+
+
+
+*******
+
+### initial setting
+- `npm init`
+- `npm install express mongoose passport passport-jwt jsonwebtoken body-parser bcryptjs validator `
+- `npm install -D nodemon`
+
+### Creating a server
+- create app.js
+- in app.js, write a skeleton code to set up the server
+```
+const express = require('express');
+const app = express();
+
+// Setup the path
+app.get("/", (res, req)=>{
+    res.send("Hello World!");
+})
+
+// Check the environmental variable port, if it exist, use it. Otherwise, use 5000 
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+})
+```
+- run node app.js to check if the server is running
+- change the package.json file
+```
+{
+  "name": "mern-twitter-from-scratch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.4",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^12.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
+```
