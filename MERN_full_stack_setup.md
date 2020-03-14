@@ -48,7 +48,7 @@ const express = require('express');
 const app = express();
 
 // Setup the path
-app.get("/", (res, req)=>{
+app.get("/", (req, res)=>{
     res.send("Hello World!");
 })
 
@@ -61,14 +61,13 @@ app.listen(port, () => {
 ```
 - run node app.js to check if the server is running
 - change the package.json file
-```
-{
+```{
   "name": "mern-twitter-from-scratch",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:debug": "nodemon --inspect app.js",
     "server": "nodemon app.js",
     "start": "node app.js"
   },
@@ -89,6 +88,7 @@ app.listen(port, () => {
     "nodemon": "^2.0.2"
   }
 }
+
 ```
 
 ### Connect node with mongoDB
@@ -109,7 +109,8 @@ module.exports = {
     "mongodb+srv://<name>:<random generated secure password>@cluster0-cmn44.mongodb.net/test?retryWrites=true&w=majority"
 };
 ```
-- in app.js file
+
+- in app.js file, add these lines
 ```
 const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
@@ -120,5 +121,76 @@ mongoose
     console.log("Connected to mongoDB");
   })
   .catch(err => console.log(err));
+```
+
+### Create routes in app.js and route files
+
+
+- create route files
+```
+const express = require("express");
+const router = express.Router();
+
+router.get("/test", (req, res) => {
+  res.json({ msg: "This is the tweet route" });
+});
+
+module.exports = router;
+```
+
+- in app.js, import route files and call it by using app.use("route that you want to make", routefile)
+
+```
+const users = require("./routes/api/users");
+const tweets = require("./routes/api/tweets");
+
+app.use("/api/users", users);
+app.use("/api/tweets", users);
+
+```
+- the real route would be "localhost:5000/api/tweets/test"
+
+
+### User Auth
+
+- Create a User file (User.js) in models folder
+```
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
+    handle: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const User = mongoose.model('users', UserSchema);
+
+module.exports = User;
+```
+
+- in app.js, we can create a new user instance as follows
+```
+const User = require('./models/User');
+
+const user = new User({
+        handle: "jim",
+        email: "jim@aa.io",
+        password: "jimisgreat123"
+    });
+    user.save();
 ```
 
