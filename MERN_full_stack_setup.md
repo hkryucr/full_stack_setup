@@ -90,3 +90,22 @@ app.listen(port, () => {
   }
 }
 ```
+
+### Connect node with mongoDB
+- run `git init`
+- create `.gitignore`
+- in .gitignore, write as follows
+```
+/node_modules
+keys.js
+
+```
+
+- create config folder and create keys.js in the config folder
+- inside keys.js
+```
+module.exports = {
+  mongoURI:
+    "mongodb+srv://<name>:<random generated secure password>@cluster0-cmn44.mongodb.net/test?retryWrites=true&w=majority"
+};
+```
