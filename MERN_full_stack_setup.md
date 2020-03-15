@@ -257,3 +257,20 @@ router.post('/login', (req, res)=>{
         })
 })
 ```
+
+
+
+
+
+
+
+
+
+## FRONT END SETUP
+
+### Create react app
+- `npx create-react-app frontend`
+- go to frontend folder
+- delete service related codes in index.js
+- `npm install axios`
+- 
