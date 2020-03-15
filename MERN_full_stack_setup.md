@@ -196,6 +196,7 @@ const user = new User({
 
 - if we want other http requests, we could create a new type of request with a new route as follows:
 
+- Signup route
 ```
 router.post('/register', (req, res)=>{
     User.findOne({
@@ -224,5 +225,34 @@ router.post('/register', (req, res)=>{
             newUser.save().then(user=>res.send(user)).catch(err => res.send(err));
         }
     });
+})
+```
+
+- login route
+
+```
+router.post('/login', (req, res)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({ email })
+        .then(user => {
+            if(!user){
+                return res.status(404).json({
+                    email: "This user does not exist."
+                });
+            }
+
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        // res.json(user);
+                        res.json({ msg: "Success" });
+                    } else {
+                        return res.status(400).json({ password: "Incorrect password" });
+                    }
+                })
+
+        })
 })
 ```
