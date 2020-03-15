@@ -106,7 +106,8 @@ keys.js
 ```
 module.exports = {
   mongoURI:
-    "mongodb+srv://<name>:<random generated secure password>@cluster0-cmn44.mongodb.net/test?retryWrites=true&w=majority"
+    "mongodb+srv://admin:m1jX0cEgcVWq1mAG@cluster0-cmn44.mongodb.net/test?retryWrites=true&w=majority",
+  secretOrKey: "secret123!@#",
 };
 ```
 
