@@ -391,6 +391,7 @@ STATICFILES_DIRS = [
 ]
 ```
 
+### Create CSS 
 ### Update index.html to import static image and css
 ```
 <!DOCTYPE html>
