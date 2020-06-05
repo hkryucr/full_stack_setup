@@ -98,4 +98,30 @@ urlpatterns = [
 ]
 ```
 
+### to create a custom urls in first_app folder, create urls.py in first_app dir
+```
+from django.conf.urls import url
+from first_app import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index')
+]
+```
+Also update urls.py in env folder (frontend bite dir) like below
+```
+
+# import include 
+from django.conf.urls import include
+
+# import views.py frorm first_app folder
+from first_app import views 
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('first_app/', include('first_app.urls2')),
+    path('admin/', admin.site.urls),
+]
+
+
+```
 
