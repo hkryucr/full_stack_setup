@@ -44,4 +44,44 @@ conda activate MyDjangoEnv (if you are not in virtual env)
 python manage.py runserver
 ```
 
+### make a new project
+```
+python manage.py startapp first_app
+```
+
+### add a new folder route in settings.py
+```
+add 'first_app' in INSTALLED_APPS
+
+ex)
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'first_app'
+]
+```
+
+### run server
+
+```
+python manage.py runserver
+```
+
+### update view.py
+```
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+def index(request):
+    returnr HttpResponse("Hello World")
+
+```
+
+
 
